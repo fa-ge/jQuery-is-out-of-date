@@ -948,7 +948,7 @@ $.now()
 Date.now()
 
 // Native
-+Date.now()
++new Date()
 
 // Native
 new Date().getTime()
