@@ -30,7 +30,7 @@ function $$(selector) {
 
 很多人一直认为jQuery还没有过时的其中一个原因是在DOM操作上非常方便。接下来比较一下。
 
-#### addClass
+### addClass
 
 为每个匹配的元素添加指定的样式类名
 
@@ -41,7 +41,7 @@ $el.addClass(className)
 // Native (IE 10+ support)
 el.classList.add(className)
 ```
-#### after
+### after
 
 在匹配元素集合中的每个元素后面插入参数所指定的内容，作为其兄弟节点。
 
@@ -58,7 +58,7 @@ el.insertAdjacentElement('afterend', newEl)
 // Native (Element)
 el.parentNode.insertBefore(newEl, el.nextSibling)
 ```
-#### append
+### append
 
 在每个匹配元素里面的末尾处插入参数内容。
 
@@ -75,11 +75,11 @@ el.insertAdjacentElement('beforeend', newEl)
 // Native (Element)
 el.appendChild(newEl)
 ```
-#### appendTo
+### appendTo
 
 ​	与[append](#append)相反
 
-#### attr
+### attr
 
 获取匹配的元素集合中的第一个元素的属性的值。设置每一个匹配元素的一个或多个属性。
 
@@ -96,7 +96,7 @@ $el.attr('foo', 'bar')
 // Native
 el.setAttribute('foo', 'bar')
 ```
-#### before
+### before
 
 根据参数设定，在匹配元素的前面插入内容（外部插入）
 
@@ -113,7 +113,7 @@ el.insertAdjacentElement('beforebegin', newEl)
 // Native (Element)
 el.parentNode.insertBefore(newEl, el)
 ```
-#### clone
+### clone
 
 创建一个匹配的元素集合的深度拷贝副本。
 
@@ -126,7 +126,7 @@ el.cloneNode()
 
 // For Deep clone , set param as `true`
 ```
-#### css
+### css
 
 获取匹配元素集合中的第一个元素的样式属性的值设置每个匹配元素的一个或多个CSS属性。
 
@@ -161,11 +161,11 @@ for (let key in cssObj) {
 const cssText = 'color: #f01; background-color: #000'
 el.style.cssText += cssText
 ```
-#### detach
+### detach
 
 从DOM中去掉所有匹配的元素。
 
-#### empty
+### empty
 
 从DOM中移除集合中匹配元素的所有子节点。
 
@@ -176,7 +176,7 @@ $el.empty()
 // Native
 el.innerHTML = ''
 ```
-#### hasClass
+### hasClass
 
 确定任何一个匹配元素是否有被分配给定的（样式）类。
 
@@ -187,14 +187,14 @@ $el.hasClass(className)
 // Native (IE 10+ support)
 el.classList.contains(className)
 ```
-#### height
+### height
 
 获取匹配元素集合中的第一个元素的当前计算高度值。设置每一个匹配元素的高度值。
 
 ```javascript
 
 ```
-#### html
+### html
 
 获取集合中第一个匹配元素的HTML内容 设置每一个匹配元素的html内容。
 
@@ -211,7 +211,7 @@ $el.html(htmlString)
 // Native
 el.innerHTML = htmlString
 ```
-#### innerHeight
+### innerHeight
 
 为匹配的元素集合中获取第一个元素的当前计算高度值,包括padding，但是不包括border。
 
@@ -223,7 +223,7 @@ $el.innerHeight()
 el.clientHeight()
 ```
 
-#### innerWidth
+### innerWidth
 
 为匹配的元素集合中获取第一个元素的当前计算宽度值,包括padding，但是不包括border。
 
@@ -235,15 +235,15 @@ $el.innerWidth()
 el.clientWidth()
 ```
 
-#### insertAfter
+### insertAfter
 
 与[after](#after)相反
 
-#### insertBefore
+### insertBefore
 
 与[before](#before)相反
 
-#### offset
+### offset
 
 在匹配的元素集合中，获取的第一个元素的当前坐标，坐标相对于文档。 设置匹配的元素集合中每一个元素的坐标， 坐标相对于文档。
 
@@ -268,7 +268,7 @@ const elLeft = 10 - elClientRect.left - document.documentElement.clientLeft
 el.style.cssText += `position: relative;top: ${elTop}px;left: ${elLeft}px;`
 ```
 
-#### outerHeight
+### outerHeight
 
 获取元素集合中第一个元素的当前计算高度值,包括padding，border和选择性的margin。返回一个整数（不包含“px”）表示的值  ，或如果在一个空集合上调用该方法，则会返回 null。
 
@@ -288,11 +288,11 @@ const {marginTop, margintBottom} = win.getComputedStyle(el, null)
 el.offsetHeight + parseFloat(marginTop) + parseFloat(margintBottom) === $el.outerHeight(true) // true
 ```
 
-#### outerWidth
+### outerWidth
 
 与[outerHeight](#outerHeight)类似。
 
-#### position
+### position
 
 获取匹配元素中第一个元素的当前坐标，相对于offset parent的坐标。( offset parent指离该元素最近的而且被定位过的祖先元素 )
 
@@ -304,7 +304,7 @@ $el.position()
 { left: el.offsetLeft, top: el.offsetTop }
 ```
 
-#### prepend
+### prepend
 
 将参数内容插入到每个匹配元素的前面（元素内部）。
 
@@ -319,11 +319,11 @@ el.insertAdjacentHTML('afterbegin', '<p></p>')
 el.insertBefore(newEl, el.firstChild)
 ```
 
-#### prependTo
+### prependTo
 
 与[prepend](#prepend)相反
 
-#### remove
+### remove
 
 将匹配元素集合从DOM中删除。（注：同时移除元素上的事件及 jQuery 数据。）
 
@@ -338,7 +338,7 @@ el.parentNode.removeChild(el)
 el.outerHTML = ''
 ```
 
-#### removeAttr
+### removeAttr
 
 为匹配的元素集合中的每个元素中移除一个属性（attribute）。
 
@@ -350,7 +350,7 @@ $el.removeAttr(attr)
 el.removeAttribute(attr)
 ```
 
-#### removeClass
+### removeClass
 
 移除集合中每个匹配元素上一个，多个或全部样式。
 
@@ -362,11 +362,11 @@ $el.removeClass(className)
 // IE 10+ support
 el.classList.remove(className)
 ```
-#### replaceAll
+### replaceAll
 
 与[replaceWith](#replaceWith)相反
 
-#### replaceWith
+### replaceWith
 
 用提供的内容替换集合中所有匹配的元素并且返回被删除元素的集合。
 
@@ -381,11 +381,11 @@ el.outerHTML = '<p></p>'
 el.parentNode.replaceChild(newEl, el)
 ```
 
-#### scrollLeft
+### scrollLeft
 
 与[scrollTop](#scrollTop)一样
 
-#### scrollTop
+### scrollTop
 
 获取匹配的元素集合中第一个元素的当前垂直滚动条的位置或设置每个匹配元素的垂直滚动条位置。设置每个匹配元素的垂直滚动条位置
 
@@ -412,7 +412,7 @@ document.body.scrollTop = 10
 el.scrollTop = 10
 ```
 
-#### text
+### text
 
 得到匹配元素集合中每个元素的合并文本，包括他们的后代设置匹配元素集合中每个元素的文本内容为指定的文本内容。
 
@@ -430,7 +430,7 @@ $el.text(string)
 el.textContent = string
 ```
 
-#### toggleClass
+### toggleClass
 
 在匹配的元素集合中的每个元素上添加或删除一个或多个样式类,取决于这个样式类是否存在或值切换属性。即：如果存在（不存在）就删除（添加）一个类。
 
@@ -442,7 +442,7 @@ $el.toggleClass(className)
 el.classList.toggle(className)
 ```
 
-#### unwrap
+### unwrap
 
 将匹配元素集合的父级元素删除，保留自身（和兄弟元素，如果存在）在原来的位置。
 
@@ -455,7 +455,7 @@ const parent = el.parentNode
 parent.outerHTML = parent.innerHTML
 ```
 
-#### val
+### val
 
 获取匹配的元素集合中第一个元素的当前值。设置匹配的元素集合中每个元素的值。
 
@@ -473,13 +473,13 @@ $el.val(value)
 el.value = value
 ```
 
-#### width
+### width
 
-#### wrap
+### wrap
 
-#### wrapAll
+### wrapAll
 
-#### wrapInner
+### wrapInner
 
 ## Query Selector
 
@@ -493,7 +493,7 @@ el.value = value
 
 以下只实现和jquery有所区别的api
 
-#### :contains
+### :contains
 
 选择所有包含指定文本的元素。
 
@@ -505,7 +505,7 @@ $('selector:contains("metchString")')
 $$('selector').filter(el => el.textContent.indexOf('metchString') !== -1)
 ```
 
-#### :emtpy
+### :emtpy
 
 选择所有没有子元素的元素（包括文本节点）。
 
@@ -517,7 +517,7 @@ $('selector:empty')
 $$('selector').filter(el => el.innerHTML === '')
 ```
 
-#### :even
+### :even
 
 选择索引值为偶数的元素，从 0 开始计数。
 
@@ -529,7 +529,7 @@ $('selector:even')
 $$('selector').filter((el, index) => (index & 1) === 0)
 ```
 
-#### :focus
+### :focus
 
 选择当前获取焦点的元素。
 
@@ -541,7 +541,7 @@ $(':focus')
 document.activeElement
 ```
 
-#### :gt
+### :gt
 
 选择匹配集合中所有大于给定index（索引值）的元素。
 
@@ -553,7 +553,7 @@ $('selector:gt(2)')
 $$('selector').filter((el, index) => index > 2)
 ```
 
-#### :has
+### :has
 
 选择元素其中至少包含指定选择器匹配的一个种元素。
 
@@ -565,7 +565,7 @@ $('selector:has(p)')
 $$('selector').filter(el => el.querySelector('p') !== null)
 ```
 
-#### :header
+### :header
 
 选择所有标题元素，像h1, h2, h3 等.
 
@@ -577,7 +577,7 @@ $('selector:header')
 $$('selector').filter(el => /^h\d$/i.test(el.nodeName))
 ```
 
-#### :hidden
+### :hidden
 
 选择所有隐藏的元素。
 
@@ -588,7 +588,7 @@ $('selector:hidden')
 // Native
 ```
 
-#### :lt
+### :lt
 
 选择匹配集合中所有索引值小于给定index参数的元素。
 
@@ -600,7 +600,7 @@ $('selector:lt(2)')
 $$('selector').filter((el, index) => index < 2)
 ```
 
-#### :not
+### :not
 
 选择所有元素去除不匹配给定的选择器的元素。
 
@@ -618,7 +618,7 @@ $('selector:not(.class)')
 $$('selector').filter(el => !el.classList.contains('class'))
 ```
 
-#### :odd 
+### :odd 
 
 选择索引值为奇数元素，从 0 开始计数。
 
@@ -630,7 +630,7 @@ $('selector:odd')
 $$('selector').filter((el, index) => (index & 1) ===1)
 ```
 
-#### only-child
+### only-child
 
 如果某个元素是其父元素的唯一子元素，那么它就会被选中。
 
@@ -645,7 +645,7 @@ $$('selector').filter(el => el.previousElementSibling === null && el.nextElement
 $$('selector').filter(el => el.parentNode.children.length === 1)
 ```
 
-#### :only-of-type
+### :only-of-type
 
 选择器匹配属于其父元素的特定类型的唯一子元素的每个元素。
 
@@ -664,7 +664,7 @@ $$('selector').filter(el => {
 })
 ```
 
-#### :parent
+### :parent
 
 选择所有含有子元素或者文本的父级元素。
 
@@ -676,7 +676,7 @@ $('selector:parent')
 $$('selector').filter(el => el.innerHTML !== '')
 ```
 
-#### :selected
+### :selected
 
 获取 select 元素中所有被选中的元素。
 
@@ -691,7 +691,7 @@ $('select option')[$('select').selectedIndex]
 $$('select option').filter(el => el.selected)
 ```
 
-#### :visible
+### :visible
 
  选择所有可见的元素。
 
@@ -705,7 +705,7 @@ $$('select option').filter(el => el.selected)
 
 ## Utilities
 
-#### contains
+### contains
 
 检查一个DOM元素是另一个DOM元素的后代。
 
@@ -717,7 +717,7 @@ $.contains(el, child)
 el !== child && el.contains(child)
 ```
 
-#### each
+### each
 
 一个通用的迭代函数，它可以用来无缝迭代对象和数组。数组和类似数组的对象通过一个长度属性（如一个函数的参数对象）来迭代数字索引，从0到length - 1。其他对象通过其属性名进行迭代。
 
@@ -731,7 +731,7 @@ array.forEach((value, index) => {
 });
 ```
 
-#### extend
+### extend
 
 将两个或更多对象的内容合并到第一个对象。
 
@@ -743,7 +743,7 @@ $.extend({}, {a: 1}, {b: 2}) // {a: 1, b: 2}
 Object.assign({}, {a: 1}, {b: 2}) // {a: 1, b: 2}
 ```
 
-#### globalEval
+### globalEval
 
 在全局上下文下执行一些JavaScript代码。
 
@@ -763,7 +763,7 @@ function Globaleval(code) {
 eval(code)
 ```
 
-#### grep
+### grep
 
 查找满足过滤函数的数组元素。原始数组不受影响。
 
@@ -775,7 +775,7 @@ $.grep([10,11,3,4], n => n > 9)
 [10,11,3,4].filter(n => n > 9)
 ```
 
-#### inArray
+### inArray
 
 在数组中查找指定值并返回它的索引（如果没有找到，则返回-1）。
 
@@ -790,7 +790,7 @@ array.indexOf(item) > -1
 array.includes(item)
 ```
 
-#### isArray
+### isArray
 
 确定的参数是一个数组。
 
@@ -802,7 +802,7 @@ $.isArray(array)
 Array.isArray(array)
 ```
 
-#### isEmptyObject
+### isEmptyObject
 
 检查对象是否为空（不包含任何属性）。
 
@@ -816,7 +816,7 @@ function isEmptyObject(obj) {
 }
 ```
 
-#### isFunction
+### isFunction
 
 确定参数是否为一个Javascript 函数。
 
@@ -834,7 +834,7 @@ function isFunction(item) {
 }
 ```
 
-#### isNumeric
+### isNumeric
 
 确定它的参数是否是一个数字。
 
@@ -850,7 +850,7 @@ function isNumeric(value) {
 }
 ```
 
-#### isPlainObject
+### isPlainObject
 
 测试对象是否是纯粹的对象（通过 "{}" 或者 "new Object" 创建的）
 
@@ -873,7 +873,7 @@ function isPlainObject(obj) {
 }
 ```
 
-#### isWindow
+### isWindow
 
 确定参数是否为一个window对象。
 
@@ -888,11 +888,11 @@ function isWindow(obj) {
 // jquery源码中是这么判断对象是否为window的，我的理解是代码可能会跑到服务器上，因为服务器上是没有window对象的。所以这么判断
 ```
 
-#### isXMLDoc
+### isXMLDoc
 
 检查一个DOM节点是否在XML文档中（或者是一个XML文档）。
 
-####  makeArray
+###  makeArray
 
 转换一个类似数组的对象成为真正的JavaScript数组。
 
@@ -907,7 +907,7 @@ Array.prototype.slice.call(arrayLike)
 Array.from(arrayLike)
 ```
 
-#### map
+### map
 
 将一个数组中的所有元素转换到另一个数组中。
 
@@ -921,7 +921,7 @@ array.map((value, index) => {
 })
 ```
 
-#### merge
+### merge
 
 合并两个数组内容到第一个数组。
 
@@ -936,7 +936,7 @@ function merge(...args) {
 }
 ````
 
-#### now
+### now
 
 返回一个数字，表示当前时间。
 
@@ -954,7 +954,7 @@ Date.now()
 new Date().getTime()
 ```
 
-#### parseHTML
+### parseHTML
 
 将字符串解析到一个DOM节点的数组中。
 
@@ -977,7 +977,7 @@ function parseHTML(string) {
 }
 ```
 
-#### parseJSON
+### parseJSON
 
 接受一个标准格式的 JSON 字符串，并返回解析后的 JavaScript 对象。
 
@@ -989,11 +989,11 @@ $.parseJSON(str)
 JSON.parse(str)
 ```
 
-#### parseXML
+### parseXML
 
 解析一个字符串到一个XML文档。
 
-#### proxy
+### proxy
 
 接受一个函数，然后返回一个新函数，并且这个新函数始终保持了特定的上下文语境。
 
@@ -1005,7 +1005,7 @@ $.proxy(fn, context)
 fn.bind(context)
 ```
 
-#### trim
+### trim
 
 去掉字符串起始和结尾的空格。
 
@@ -1017,7 +1017,7 @@ $.trim(string)
 string.trim()
 ```
 
-#### type
+### type
 
 确定JavaScript 对象的类型[[Class]] 。
 
