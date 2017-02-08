@@ -20,7 +20,7 @@ function $(selector) {
 }
 
 function $$(selector) {
-  return Array.prototype.slice.call(document.querySelectorAll(selector)) || []
+  return Array.prototype.slice.call(document.querySelectorAll(selector))
 }
 ```
 
@@ -487,7 +487,7 @@ el.value = value
 
 - `document.querySelector` 返回第一个匹配的 Element
 - `document.querySelectorAll` 返回所有匹配的 Element 组成的 NodeList。它可以通过 `[].slice.call()` 把它转成 Array
-- 如果匹配不到任何 Element，jQuery 返回空数组 `[]`，但 `document.querySelector` 返回 `null`，注意空指针异常。当找不到时，也可以使用 `||` 设置默认的值，如 `document.querySelectorAll(selector) || []`
+- 如果匹配不到任何 Element，jQuery 返回空数组 `[]`，但 `document.querySelector` 返回 `null`，注意空指针异常。
 
 > 注意：`document.querySelector` 和 `document.querySelectorAll` 性能很**差**。如果想提高性能，尽量使用 `document.getElementById`、`document.getElementsByClassName` 或 `document.getElementsByTagName`。
 
