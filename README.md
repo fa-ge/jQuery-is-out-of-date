@@ -4,13 +4,13 @@
 
 ## 目录
 
-1. [Regulation](#Regulation)
-2. [DOM Manipulation](#DOM Manipulation)
-3. [Query Selector](#Query Selector)
-4. [Ajax](#Ajax)
-5. [Events](#Events)
-6. [Utilities](#Utilities)
-7. [Animation](#Animation)
+1. [Regulation](#regulation)
+2. [DOM Manipulation](#dom-manipulation)
+3. [Query Selector](#query-selector)
+4. [Ajax](#ajax)
+5. [Events](#events)
+6. [Utilities](#utilities)
+7. [Animation](#animation)
 
 ## Regulation
 
