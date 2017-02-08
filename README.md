@@ -286,7 +286,7 @@ el.offsetHeight + parseFloat(marginTop) + parseFloat(margintBottom) === $el.oute
 
 ### outerWidth
 
-与[outerHeight](#outerHeight)类似。
+与[outerHeight](#outerheight)类似。
 
 ### position
 
@@ -359,7 +359,7 @@ el.classList.remove(className)
 ```
 ### replaceAll
 
-与[replaceWith](#replaceWith)相反
+与[replaceWith](#replacewith)相反
 
 ### replaceWith
 
@@ -378,7 +378,7 @@ el.parentNode.replaceChild(newEl, el)
 
 ### scrollLeft
 
-与[scrollTop](#scrollTop)一样
+与[scrollTop](#scrolltop)一样
 
 ### scrollTop
 
