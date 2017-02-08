@@ -259,7 +259,15 @@ el.querySelectorAll(selector)
 
 ### has
 
-与[:has](#:has)类似
+筛选匹配元素集合中的那些有相匹配的选择器或DOM元素的后代元素。
+
+```javascript
+// jQuery
+$(selector).has('p')
+
+// Native
+$$(selector).filter(el => el.querySelector('p') !== null)
+```
 
 ### hasClass
 
@@ -403,7 +411,16 @@ while((el = el.nextElementSibling) !== null) {
 
 ### not
 
-与[:not](#:not)类似
+从匹配的元素集合中移除指定的元素。
+
+```javascript
+// jQuery
+$(el).not(selector)
+
+// Native
+const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector
+$$(el).filter(el => !matchesSelector.call(el, selector))
+```
 
 ### offset
 
@@ -557,13 +574,13 @@ el.insertBefore(newEl, el.firstChild)
 
 获得集合中每个匹配元素的所有前面的兄弟元素，选择性筛选的选择器。
 
-与[nextAll](#nextAll)类似
+与[nextAll](#nextall)类似
 
 ### prevUntil
 
 获取每个元素但不包括选择器，DOM节点，或者jQuery对象匹配的元素的所有前面的兄弟元素。
 
-与[nextUntil](#nextUntil)类似
+与[nextUntil](#nextuntil)类似
 
 ### remove
 
@@ -835,15 +852,7 @@ $$('selector').filter((el, index) => index > 2)
 
 ### :has
 
-选择元素其中至少包含指定选择器匹配的一个种元素。
-
-```javascript
-// jQuery
-$('selector:has(p)')
-
-// Native
-$$('selector').filter(el => el.querySelector('p') !== null)
-```
+与[has](#has)类似
 
 ### :header
 
@@ -871,21 +880,7 @@ $$('selector').filter((el, index) => index < 2)
 
 ### :not
 
-选择所有元素去除不匹配给定的选择器的元素。
-
-```javascript
-// jQuery
-$('input:not(:checked)')
-
-// Native
-$$('input').filter(el => !el.checked)
-
-// jQuery
-$('selector:not(.class)')
-
-// Native (IE 10+ support)
-$$('selector').filter(el => !el.classList.contains('class'))
-```
+与[not](#not)类似
 
 ### :odd 
 
