@@ -77,7 +77,7 @@ el.appendChild(newEl)
 ```
 ### appendTo
 
-​	与[append](#append)相反
+与[append](#append)相反
 
 ### attr
 
@@ -161,10 +161,6 @@ for (let key in cssObj) {
 const cssText = 'color: #f01; background-color: #000'
 el.style.cssText += cssText
 ```
-### detach
-
-从DOM中去掉所有匹配的元素。
-
 ### empty
 
 从DOM中移除集合中匹配元素的所有子节点。
@@ -358,8 +354,7 @@ el.removeAttribute(attr)
 // jQuery
 $el.removeClass(className)
 
-// Native
-// IE 10+ support
+// Native (IE 10+ support)
 el.classList.remove(className)
 ```
 ### replaceAll
@@ -477,9 +472,23 @@ el.value = value
 
 ### wrap
 
-### wrapAll
+在每个匹配的元素外层包上一个html元素。
 
-### wrapInner
+```javascript
+// jQuery
+$el.wrap('<div class="wrapper"></div>')
+
+// Native
+const wrapper = document.createElement('div')
+wrapper.className = 'wrapper'
+el.parentNode.insertBefore(wrapper, el)
+el.parentNode.removeChild(el)
+wrapper.appendChild(el)
+
+// Native
+// 这种性能比较差 https://jsperf.com/outerhtml-appendchild
+el.outerHTML = `<div class="wrapper">${el.outerHTML}</div>`
+```
 
 ## Query Selector
 
@@ -577,17 +586,6 @@ $('selector:header')
 $$('selector').filter(el => /^h\d$/i.test(el.nodeName))
 ```
 
-### :hidden
-
-选择所有隐藏的元素。
-
-```javascript
-// jQuery
-$('selector:hidden')
-
-// Native
-```
-
 ### :lt
 
 选择匹配集合中所有索引值小于给定index参数的元素。
@@ -627,7 +625,7 @@ $$('selector').filter(el => !el.classList.contains('class'))
 $('selector:odd')
 
 // Native
-$$('selector').filter((el, index) => (index & 1) ===1)
+$$('selector').filter((el, index) => (index & 1) === 1)
 ```
 
 ### only-child
@@ -691,14 +689,6 @@ $('select option')[$('select').selectedIndex]
 $$('select option').filter(el => el.selected)
 ```
 
-### :visible
-
- 选择所有可见的元素。
-
-```javascript
-
-```
-
 ## Ajax
 
 ## Events
@@ -723,12 +713,10 @@ el !== child && el.contains(child)
 
 ```javascript
 // jQuery
-$.each(array, (index, value) => {
-});
+$.each(array, (index, value) => {})
 
 // Native
-array.forEach((value, index) => {
-});
+array.forEach((value, index) => {})
 ```
 
 ### extend
@@ -812,7 +800,7 @@ $.isEmptyObject(obj)
 
 // Native
 function isEmptyObject(obj) {
-  return Object.keys(obj).length === 0;
+  return Object.keys(obj).length === 0
 }
 ```
 
@@ -822,7 +810,7 @@ function isEmptyObject(obj) {
 
 ```javascript
 // jQuery
-$.isFunction(item);
+$.isFunction(item)
 
 // Native
 function isFunction(item) {
@@ -856,20 +844,20 @@ function isNumeric(value) {
 
 ```javascript
 // jQuery
-$.isPlainObject(obj);
+$.isPlainObject(obj)
 
 // Native
 function isPlainObject(obj) {
   if (typeof (obj) !== 'object' || obj.nodeType || obj !== null && obj !== undefined && obj === obj.window) {
-    return false;
+    return false
   }
 
   if (obj.constructor &&
       !Object.prototype.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
-    return false;
+    return false
   }
 
-  return true;
+  return true
 }
 ```
 
@@ -879,18 +867,14 @@ function isPlainObject(obj) {
 
 ```javascript
 // jQuery
-$.isWindow(obj);
+$.isWindow(obj)
 
 // Native
 function isWindow(obj) {
-  return obj !== null && obj !== undefined && obj === obj.window;
+  return obj !== null && obj !== undefined && obj === obj.window
 }
 // jquery源码中是这么判断对象是否为window的，我的理解是代码可能会跑到服务器上，因为服务器上是没有window对象的。所以这么判断
 ```
-
-### isXMLDoc
-
-检查一个DOM节点是否在XML文档中（或者是一个XML文档）。
 
 ###  makeArray
 
@@ -960,7 +944,7 @@ new Date().getTime()
 
 ```javascript
 // jQuery
-$.parseHTML(htmlString)
+$.parseHTML(string)
 
 // Native
 function parseHTML(string) {
@@ -973,7 +957,14 @@ function parseHTML(string) {
   context.head.appendChild(base)
 
   context.body.innerHTML = string
-  return context.body.children
+  return context.body.childNodes
+}
+
+// Native (IE 10+ support)
+// 两者性能差不多 https://jsperf.com/parsehtml2
+function parseHTML(string) {
+  const context = new DOMParser().parseFromString(string, "text/html")
+  return context.body.childNodes
 }
 ```
 
@@ -992,6 +983,14 @@ JSON.parse(str)
 ### parseXML
 
 解析一个字符串到一个XML文档。
+
+```javascript
+// jQuery
+jQuery.parseXML(xmlString)
+
+// Native
+new DOMParser().parseFromString(xmlString, 'application/xml')
+```
 
 ### proxy
 
@@ -1023,16 +1022,19 @@ string.trim()
 
 ```javascript
 // jQuery
-$.type(obj);
+$.type(obj)
 
 // Native
 function type(item) {
-  const reTypeOf = /(?:^\[object\s(.*?)\]$)/;
+  const reTypeOf = /(?:^\[object\s(.*?)\]$)/
   return Object.prototype.toString.call(item)
     .replace(reTypeOf, '$1')
-    .toLowerCase();
+    .toLowerCase()
 }
 ```
 
 ## Animation
 
+
+
+有哪块错误的或者不懂得可以在github上提个issue。如果哪块有更好的解法可以pr。
