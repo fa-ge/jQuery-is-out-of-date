@@ -2,6 +2,8 @@
 
 在我看来，jQuery确实已经过时了。本项目总结了绝大部分 jQuery API 替代的方法，类似项目[You-Dont-Need-jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery)，并会再此基础上进行很多的补充。写这个项目主要想让自己和大家增进对javascript原生api的理解，也可以作为一个"原生jquery"的api文档随时查看。兼容ie9及以上浏览器，如不支持ie9会特别说明。
 
+原文地址 [https://github.com/fa-ge/jQuery-is-out-of-date](#https://github.com/fa-ge/jQuery-is-out-of-date)
+
 ## 目录
 
 1. [Regulation](#regulation)
@@ -24,11 +26,23 @@ function $$(selector) {
 }
 ```
 
-如果在jQuery示例下的$是jquery对象，在Native示例下的$是以上的实现。相当于实现了chrome控制台上$，$$方法。以$开头的变量名为jQuery对象。
+如果在jQuery示例下的$是jquery对象，在Native示例下的$是以上的实现。相当于实现了chrome控制台上$，$$方法。
 
 ##  DOM Manipulation
 
 很多人一直认为jQuery还没有过时的其中一个原因是在DOM操作上非常方便。接下来比较一下。
+
+### add
+
+添加元素到匹配的元素集合。
+
+```javascript
+// jQuery
+$(selector).add($(newEl))
+
+// Native
+$$(selector).push(newEl)
+```
 
 ### addClass
 
@@ -36,7 +50,7 @@ function $$(selector) {
 
 ```javascript
 // jQuery
-$el.addClass(className)
+$(el).addClass(className)
 
 // Native (IE 10+ support)
 el.classList.add(className)
@@ -47,7 +61,7 @@ el.classList.add(className)
 
 ```javascript
 // jQuery
-$el.after('<p></p>')
+$(el).after('<p></p>')
 
 // Native (Html string)
 el.insertAdjacentHTML('afterend', '<p></p>')
@@ -64,7 +78,7 @@ el.parentNode.insertBefore(newEl, el.nextSibling)
 
 ```javascript
 // jQuery
-$el.append('<p></p>')
+$(el).append('<p></p>')
 
 // Native (Html string)
 el.insertAdjacentHTML('beforeend', '<p></p>')
@@ -85,13 +99,13 @@ el.appendChild(newEl)
 
 ```javascript
 // jQuery
-$el.attr('foo')
+$(el).attr('foo')
 
 // Native
 el.getAttribute('foo')
 
 // jQuery
-$el.attr('foo', 'bar')
+$(el).attr('foo', 'bar')
 
 // Native
 el.setAttribute('foo', 'bar')
@@ -102,7 +116,7 @@ el.setAttribute('foo', 'bar')
 
 ```javascript
 // jQuery
-$el.before('<p></p>')
+$(el).before('<p></p>')
 
 // Native (Html string)
 el.insertAdjacentHTML('beforebegin', '<p></p>')
@@ -113,26 +127,73 @@ el.insertAdjacentElement('beforebegin', newEl)
 // Native (Element)
 el.parentNode.insertBefore(newEl, el)
 ```
+### children
+
+获得匹配元素集合中每个元素的子元素，选择器选择性筛选。
+
+```javascript
+// jQuery
+$(el).children()
+
+// Native
+el.children
+```
+
 ### clone
 
 创建一个匹配的元素集合的深度拷贝副本。
 
 ```javascript
 // jQuery
-$el.clone()
+$(el).clone()
 
 // Native
 el.cloneNode()
 
 // For Deep clone , set param as `true`
 ```
+### closest
+
+从元素本身开始，在DOM 树上逐级向上级元素匹配，并返回最先匹配的祖先元素。以数组的形式返回与选择器相匹配的所有元素，从当前元素开始，在 DOM 树中向上遍历。
+
+```javascript
+ // jQuery
+$el.closest(selector)
+
+// Native - Only latest, NO IE
+el.closest(selector)
+
+// Native
+function closest(el, selector = false) {
+  const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector
+  do {
+    if (matchesSelector.call(el, selector)) {
+      return el
+    }
+  } while ((el = el.parentElement) !== null)
+  return null
+}
+```
+
+### contents
+
+获得匹配元素集合中每个元素的子元素，包括文字和注释节点。
+
+```javascript
+// jQuery
+$(el).contents()
+
+// Native
+el.childNodes
+```
+
 ### css
 
 获取匹配元素集合中的第一个元素的样式属性的值设置每个匹配元素的一个或多个CSS属性。
 
 ```javascript
 // jQuery
-$el.css('color')
+$(el).css('color')
 
 // Native
 // 注意：此处为了解决当 style 值为 auto 时，返回 auto 的问题
@@ -142,14 +203,14 @@ const win = el.ownerDocument.defaultView
 win.getComputedStyle(el, null).color
 
 // jQuery
-$el.css({ color: '#f01' })
+$(el).css({ color: '#f01' })
 
 // Native
 el.style.color = '#f01'
 
 // 一次性设置多个样式
 // jQuery
-$el.css({ color: '#f01', 'background-color': '#000' })
+$(el).css({ color: '#f01', 'background-color': '#000' })
 
 // Native
 const cssObj = {color: '#f01', backgroundColor: '#000'}
@@ -167,18 +228,46 @@ el.style.cssText += cssText
 
 ```javascript
 // jQuery
-$el.empty()
+$(el).empty()
 
 // Native
 el.innerHTML = ''
 ```
+### filter
+
+筛选元素集合中匹配表达式 或 通过传递函数测试的 那些元素集合。
+
+```javascript
+// jQuery
+$(selector).filter(filterFn)
+
+// Native
+$$(selector).filter(filterFn)
+```
+
+### find
+
+通过一个选择器，jQuery对象，或元素过滤，得到当前匹配的元素集合中每个元素的后代。
+
+```javascript
+// jQuery
+$(el).find(selector)
+
+// Native
+el.querySelectorAll(selector)
+```
+
+### has
+
+与[:has](#:has)类似
+
 ### hasClass
 
 确定任何一个匹配元素是否有被分配给定的（样式）类。
 
 ```javascript
 // jQuery
-$el.hasClass(className)
+$(el).hasClass(className)
 
 // Native (IE 10+ support)
 el.classList.contains(className)
@@ -188,7 +277,41 @@ el.classList.contains(className)
 获取匹配元素集合中的第一个元素的当前计算高度值。设置每一个匹配元素的高度值。
 
 ```javascript
+// jQuery window
+$(window).height()
 
+// Native
+window.innerHeight
+
+// jQuery document
+$(document).height()
+
+// Native
+const body = document.body
+const html = document.documentElement
+const height = Math.max(
+  body.offsetHeight,
+  body.scrollHeight,
+  html.clientHeight,
+  html.offsetHeight,
+  html.scrollHeight
+)
+
+// jQuery Element (it's `height` always equals to content height)
+$(el).height()
+
+// Native
+function getHeight(el) {
+  const styles = window.getComputedStyle(el)
+  const height = el.clientHeight
+  const paddingTop = parseFloat(styles.paddingTop)
+  const paddingBottom = parseFloat(styles.paddingBottom)
+  return height - paddingTop - paddingBottom
+}
+
+// Native
+// when `border-box`, it's `height` === (content height) + padding + border; when `content-box`, it's `height` === (content height)
+getComputedStyle(el, null).height
 ```
 ### html
 
@@ -196,13 +319,13 @@ el.classList.contains(className)
 
 ```javascript
 // jQuery
-$el.html()
+$(el).html()
 
 // Native
 el.innerHTML
 
 // jQuery
-$el.html(htmlString)
+$(el).html(htmlString)
 
 // Native
 el.innerHTML = htmlString
@@ -213,7 +336,7 @@ el.innerHTML = htmlString
 
 ```javascript
 // jQuery
-$el.innerHeight()
+$(el).innerHeight()
 
 // Native
 el.clientHeight()
@@ -225,7 +348,7 @@ el.clientHeight()
 
 ```javascript
 // jQuery
-$el.innerWidth()
+$(el).innerWidth()
 
 // Native
 el.clientWidth()
@@ -239,13 +362,56 @@ el.clientWidth()
 
 与[before](#before)相反
 
+### is
+
+判断当前匹配的元素集合中的元素，是否为一个选择器，DOM元素，或者jQuery对象，如果这些元素至少一个匹配给定的参数，那么返回true。
+
+```javascript
+// jQuery
+$(el).is(selector)
+
+// Native
+(el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector).call(el, selector)
+```
+
+### next
+
+取得匹配的元素集合中每一个元素紧邻的后面同辈元素的元素集合。如果提供一个选择器，那么只有紧跟着的兄弟元素满足选择器时，才会返回此元素。
+
+```javascript
+// jQuery
+$(el).next()
+
+// Native
+el.nextElementSibling
+```
+
+### nextAll
+
+获得每个匹配元素集合中所有下面的同辈元素，选择性筛选的选择器。
+
+```javascript
+// jQuery
+$(el).nextAll()
+
+// Native
+const nextAll = []
+while((el = el.nextElementSibling) !== null) {
+  nextAll.push(el)
+}
+```
+
+### not
+
+与[:not](#:not)类似
+
 ### offset
 
 在匹配的元素集合中，获取的第一个元素的当前坐标，坐标相对于文档。 设置匹配的元素集合中每一个元素的坐标， 坐标相对于文档。
 
 ```javascript
 // jQuery
-$el.offset()
+$(el).offset()
 
 // Native
 const elClientRect = el.getBoundingClientRect()
@@ -255,7 +421,7 @@ const elClientRect = el.getBoundingClientRect()
 }
 
 // jQuery
-$el.offset(10, 10)
+$(el).offset(10, 10)
 
 // Native
 const elClientRect = el.getBoundingClientRect()
@@ -264,29 +430,91 @@ const elLeft = 10 - elClientRect.left - document.documentElement.clientLeft
 el.style.cssText += `position: relative;top: ${elTop}px;left: ${elLeft}px;`
 ```
 
+### offsetParent
+
+```javascript
+// jQuery
+$(el).offsetParent()
+
+// Native
+el.offsetParent || el
+```
+
 ### outerHeight
 
 获取元素集合中第一个元素的当前计算高度值,包括padding，border和选择性的margin。返回一个整数（不包含“px”）表示的值  ，或如果在一个空集合上调用该方法，则会返回 null。
 
 ```javascript
 // jQuery
-$el.outerHeight()
+$(el).outerHeight()
 
 // Native
 el.offsetHeight
 
 // jQuery
-$el.outerHeight(true)
+$(el).outerHeight(true)
 
 // Native
 const win = el.ownerDocument.defaultView
 const {marginTop, margintBottom} = win.getComputedStyle(el, null)
-el.offsetHeight + parseFloat(marginTop) + parseFloat(margintBottom) === $el.outerHeight(true) // true
+el.offsetHeight + parseFloat(marginTop) + parseFloat(margintBottom) === $(el).outerHeight(true) // true
 ```
 
 ### outerWidth
 
 与[outerHeight](#outerheight)类似。
+
+### parent
+
+取得匹配元素集合中，每个元素的父元素，可以提供一个可选的选择器。
+
+```javascript
+// jQuery
+$(el).parent()
+
+// Native
+el.parentNode
+```
+
+### parents
+
+获得集合中每个匹配元素的祖先元素，可以提供一个可选的选择器作为参数。
+
+```javascript
+// jQuery
+$(el).parents(selector)
+
+// Native
+function parents(el, selector = '*') {
+  const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector
+  const parentsMatch = []
+  while ((el = el.parentElement) !== null) {
+	if (matchesSelector.call(el, selector)) {
+      parentsMatch.push(el)
+	}
+  }
+  return parentsMatch
+}
+```
+
+### parentsUntil
+
+查找当前元素的所有的前辈元素，直到遇到选择器， DOM 节点或 jQuery 对象匹配的元素为止，但不包括这些元素。
+
+```javascript
+// jQuery
+$(el).parentsUntil(selector)
+
+// Native
+function parentsUntil(el, selector = false) {
+  const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector
+  const parentsMatch = []
+  while ((el = el.parentElement) !== null && !matchesSelector.call(el, selector)) {
+      parentsMatch.push(el)
+  }
+  return parentsMatch
+}
+```
 
 ### position
 
@@ -294,7 +522,7 @@ el.offsetHeight + parseFloat(marginTop) + parseFloat(margintBottom) === $el.oute
 
 ```javascript
 // jQuery
-$el.position()
+$(el).position()
 
 // Native
 { left: el.offsetLeft, top: el.offsetTop }
@@ -306,7 +534,7 @@ $el.position()
 
 ```javascript
 // jQuery
-$el.prepend('<p></p>')
+$(el).prepend('<p></p>')
 
 // Native (HTML string)
 el.insertAdjacentHTML('afterbegin', '<p></p>')
@@ -319,13 +547,31 @@ el.insertBefore(newEl, el.firstChild)
 
 与[prepend](#prepend)相反
 
+### prev
+
+取得一个包含匹配的元素集合中每一个元素紧邻的前一个同辈元素的元素集合。选择性筛选的选择器。
+
+与[next](#next)类似
+
+### prevAll
+
+获得集合中每个匹配元素的所有前面的兄弟元素，选择性筛选的选择器。
+
+与[nextAll](#nextAll)类似
+
+### prevUntil
+
+获取每个元素但不包括选择器，DOM节点，或者jQuery对象匹配的元素的所有前面的兄弟元素。
+
+与[nextUntil](#nextUntil)类似
+
 ### remove
 
 将匹配元素集合从DOM中删除。（注：同时移除元素上的事件及 jQuery 数据。）
 
 ```javascript
 // jQuery
-$el.remove()
+$(el).remove()
 
 // Native
 el.parentNode.removeChild(el)
@@ -340,7 +586,7 @@ el.outerHTML = ''
 
 ```javascript
 // jQuery
-$el.removeAttr(attr)
+$(el).removeAttr(attr)
 
 // Native
 el.removeAttribute(attr)
@@ -352,7 +598,7 @@ el.removeAttribute(attr)
 
 ```javascript
 // jQuery
-$el.removeClass(className)
+$(el).removeClass(className)
 
 // Native (IE 10+ support)
 el.classList.remove(className)
@@ -367,7 +613,7 @@ el.classList.remove(className)
 
 ```javascript
 // jQuery
-$el.replaceWith('<p></p>')
+$(el).replaceWith('<p></p>')
 
 // Native (HTML string)
 el.outerHTML = '<p></p>'
@@ -407,19 +653,42 @@ document.body.scrollTop = 10
 el.scrollTop = 10
 ```
 
+### siblings
+
+获得匹配元素集合中每个元素的兄弟元素,可以提供一个可选的选择器。。
+
+```javascript
+// jQuery
+$(el).siblings()
+
+// Native
+```
+
+### slice
+
+根据指定的下标范围，过滤匹配的元素集合，并生成一个新的 jQuery 对象。
+
+```javascript
+// jQuery
+$(selector).slice(1, 6)
+
+// Native
+$$(selector).slice(1, 6)
+```
+
 ### text
 
 得到匹配元素集合中每个元素的合并文本，包括他们的后代设置匹配元素集合中每个元素的文本内容为指定的文本内容。
 
 ```javascript
 // jQuery
-$el.text()
+$(el).text()
 
 // Native
 el.textContent
 
 // jQuery
-$el.text(string)
+$(el).text(string)
 
 // Native
 el.textContent = string
@@ -431,7 +700,7 @@ el.textContent = string
 
 ```javascript
 // jQuery
-$el.toggleClass(className)
+$(el).toggleClass(className)
 
 // Native
 el.classList.toggle(className)
@@ -443,7 +712,7 @@ el.classList.toggle(className)
 
 ```javascript
 // jQuery
-$el.unwrap()
+$(el).unwrap()
 
 // Native
 const parent = el.parentNode
@@ -456,13 +725,13 @@ parent.outerHTML = parent.innerHTML
 
 ```javascript
 // jQuery
-$el.val()
+$(el).val()
 
 // Native
 el.value
 
 // jQuery
-$el.val(value)
+$(el).val(value)
 
 // Native
 el.value = value
@@ -470,13 +739,15 @@ el.value = value
 
 ### width
 
+与[height](#height)类似
+
 ### wrap
 
 在每个匹配的元素外层包上一个html元素。
 
 ```javascript
 // jQuery
-$el.wrap('<div class="wrapper"></div>')
+$(el).wrap('<div class="wrapper"></div>')
 
 // Native
 const wrapper = document.createElement('div')
