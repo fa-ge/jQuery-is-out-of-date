@@ -415,11 +415,11 @@ while((el = el.nextElementSibling) !== null) {
 
 ```javascript
 // jQuery
-$(el).not(selector)
+$(selector).not(matches)
 
 // Native
 const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector
-$$(el).filter(el => !matchesSelector.call(el, selector))
+$$(selector).filter(el => !matchesSelector.call(el, matches))
 ```
 
 ### offset
