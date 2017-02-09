@@ -175,7 +175,7 @@ function closest(el, selector = false) {
 }
 ```
 
-### contents
+### content
 
 获得匹配元素集合中每个元素的子元素，包括文字和注释节点。
 
@@ -185,6 +185,9 @@ $(el).contents()
 
 // Native
 el.childNodes
+
+// Native iframe
+el.contentDocument
 ```
 
 ### css
