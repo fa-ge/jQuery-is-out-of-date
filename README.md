@@ -679,9 +679,14 @@ el.scrollTop = 10
 
 ```javascript
 // jQuery
-$(el).siblings()
+$(el).siblings(selector)
 
 // Native
+function siblings(el, selector = '*') {
+	const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector
+	return Array.prototype.slice.call(el.parentNode.children).filter(child => (child !== el && matchesSelector.call(child, selector)))
+}
+
 ```
 
 ### slice
@@ -799,10 +804,10 @@ el.outerHTML = `<div class="wrapper">${el.outerHTML}</div>`
 
 ```javascript
 // jQuery
-$('selector:contains("metchString")')
+$('selector:contains("matchString")')
 
 // Native
-$$('selector').filter(el => el.textContent.indexOf('metchString') !== -1)
+$$('selector').filter(el => el.textContent.indexOf('matchString') !== -1)
 ```
 
 ### :emtpy
