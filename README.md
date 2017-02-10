@@ -350,7 +350,7 @@ el.innerHTML = htmlString
 $(el).innerHeight()
 
 // Native
-el.clientHeight()
+el.clientHeight
 ```
 
 ### innerWidth
@@ -362,7 +362,7 @@ el.clientHeight()
 $(el).innerWidth()
 
 // Native
-el.clientWidth()
+el.clientWidth
 ```
 
 ### insertAfter
