@@ -684,7 +684,7 @@ $(el).siblings(selector)
 // Native
 function siblings(el, selector = '*') {
 	const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector
-	return Array.prototype.slice.call(el.parentNode.children).filter(child => (child !== el && matchesSelector.call(child, selector)))
+	return Array.prototype.slice.call(el.parentNode.children).filter(child => child !== el && matchesSelector.call(child, selector))
 }
 
 ```
